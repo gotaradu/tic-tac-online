@@ -1,0 +1,7 @@
+.box {
+  border-radius: 15px;
+  background-color: rgba(117, 84, 84, 0.448);
+  width: 90%;
+  max-width: 40rem;
+  margin: 3rem auto;
+}
