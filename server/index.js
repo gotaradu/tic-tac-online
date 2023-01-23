@@ -70,6 +70,7 @@ io.on('connection', (socket) => {
   console.log(`user connected: ${socket.id}`)
 
   socket.on('join_room', (data) => {
+    console.log(data)
     socket.join(data)
   })
   socket.on('leave_room', (data) => {
@@ -77,6 +78,11 @@ io.on('connection', (socket) => {
   })
   socket.on('send-message', (data) => {
     socket.to(data.room).emit('receive-message', data)
+  })
+
+  socket.on('play', (data) => {
+    console.log(data)
+    socket.to(data.room).emit('receive-play', data)
   })
 })
 

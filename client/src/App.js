@@ -19,6 +19,7 @@ function App() {
   //reveive event
   useEffect(() => {
     socket.on('receive-message', (data) => {
+      console.log(data)
       setReceivedMessage(data.message)
     })
   }, [socket])
@@ -36,36 +37,36 @@ function App() {
     }
   }
 
-  // return (
-  //   <div>
-  //     {joined && (
-  //       <>
-  //         <input
-  //           onChange={(event) => {
-  //             event.preventDefault()
-  //             setMessage(event.target.value)
-  //           }}
-  //         ></input>
-  //         <button onClick={sendMessage}> SendMessage</button>
-  //         <button onClick={leaveRoomHandler}>leave Room</button>
-  //         <h1>{receivedMessage}</h1>
-  //       </>
-  //     )}
-  //     {!joined && (
-  //       <>
-  //         <input
-  //           onChange={(event) => {
-  //             event.preventDefault()
-  //             setRoom(event.target.value)
-  //           }}
-  //         ></input>
-  //         <button onClick={joinRoomHandler}>Join Room</button>
-  //         <h1>{receivedMessage}</h1>
-  //       </>
-  //     )}
-  //   </div> //
-  // )
-  return <TicTac />
+  return (
+    <div>
+      {joined && (
+        <>
+          <input
+            onChange={(event) => {
+              event.preventDefault()
+              setMessage(event.target.value)
+            }}
+          ></input>
+          <button onClick={sendMessage}> SendMessage</button>
+          <button onClick={leaveRoomHandler}>leave Room</button>
+          <h1>{receivedMessage}</h1>
+          <TicTac socket={socket} room={room} />
+        </>
+      )}
+      {!joined && (
+        <>
+          <input
+            onChange={(event) => {
+              event.preventDefault()
+              setRoom(event.target.value)
+            }}
+          ></input>
+          <button onClick={joinRoomHandler}>Join Room</button>
+          <h1>{receivedMessage}</h1>
+        </>
+      )}
+    </div> //
+  )
 }
 
 export default App
