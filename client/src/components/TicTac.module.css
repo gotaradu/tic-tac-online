@@ -21,3 +21,7 @@
   align-self: flex-end;
   cursor: pointer;
 }
+
+.winner {
+  background-color: red;
+}
