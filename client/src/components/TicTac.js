@@ -71,7 +71,7 @@ const reducer = (state, action) => {
     return {
       items: action.payload.items,
       player: action.payload.player,
-      winner: winner,
+      winned: winner,
       blocked: blocked,
       blockedTable: false,
     }
@@ -185,10 +185,10 @@ const TicTac = (props) => {
 
   return (
     <Card>
-      {(state.winner || (!state.winner && !state.items.includes(null))) && (
+      {(state.winned || (!state.winned && !state.items.includes(null))) && (
         <>
-          <Winner winner={state.winner}>
-            {state.winner ? `${state.winner} has won` : `It's a draw`}
+          <Winner winner={state.winned}>
+            {state.winned ? `${state.winned} has won` : `It's a draw`}
           </Winner>
           <button onClick={handleReset}>Reset</button>
         </>
