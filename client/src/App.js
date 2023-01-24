@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 import Card from './components/Card'
 import TicTac from './components/TicTac'
+
 const socket = io.connect('http://localhost:4000')
 
 function App() {
@@ -22,12 +23,14 @@ function App() {
       console.log(data)
       setReceivedMessage(data.message)
     })
+    socket.on('enable-render', (data) => {
+      setJoined(data)
+    })
   }, [socket])
 
   const joinRoomHandler = () => {
     if (room !== '') {
       socket.emit('join_room', room)
-      setJoined(true)
     }
   }
   const leaveRoomHandler = () => {

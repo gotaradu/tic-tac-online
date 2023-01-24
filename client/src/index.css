@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies&family=Space+Mono:wght@700&display=swap');
+
+body {
+  margin: 10px;
+
+  font-family: 'Space Mono', monospace;
+  background-color: rgb(107, 118, 124);
+}

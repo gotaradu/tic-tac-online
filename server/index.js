@@ -56,7 +56,7 @@ const http = require('http')
 const { Server } = require('socket.io')
 const cors = require('cors')
 const server = http.createServer(app)
-
+const rooms = [{ id: -1 }]
 app.use(cors())
 
 const io = new Server(server, {
@@ -69,12 +69,35 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   console.log(`user connected: ${socket.id}`)
 
-  socket.on('join_room', (data) => {
-    console.log(data)
-    socket.join(data)
+  socket.on('join_room', (room) => {
+    let count = 0
+
+    console.log(rooms[0].id)
+    for (let i = 0; i < rooms.length; i++) {
+      if (rooms[i].id == room) {
+        count++
+      }
+    }
+    if (count > 1) {
+      console.log('FULL')
+      socket.emit('enable-render', false)
+    } else {
+      console.log(count)
+      rooms.push({ id: room })
+      socket.join(room)
+      enabled = true
+      socket.emit('enable-render', true)
+    }
+    console.log(rooms)
   })
   socket.on('leave_room', (data) => {
+    const room = rooms.find((room) => room.id == data)
+    const index = rooms.indexOf(room)
+    console.log(index)
+    rooms.splice(index, 1)
+
     socket.leave(data)
+    console.log(rooms)
   })
   socket.on('send-message', (data) => {
     socket.to(data.room).emit('receive-message', data)
@@ -83,6 +106,10 @@ io.on('connection', (socket) => {
   socket.on('play', (data) => {
     console.log(data)
     socket.to(data.room).emit('receive-play', data)
+  })
+  socket.on('reset', (data) => {
+    console.log(data)
+    socket.to(data).emit('receive-reset', data)
   })
 })
 
