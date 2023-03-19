@@ -1,0 +1,8 @@
+.c {
+  display: block;
+  justify-content: center;
+  background-color: red;
+  text-align: center;
+  border-radius: 4px;
+  font-size: large;
+}

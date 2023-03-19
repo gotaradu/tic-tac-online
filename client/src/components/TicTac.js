@@ -190,7 +190,9 @@ const TicTac = (props) => {
           <Winner winner={state.winned}>
             {state.winned ? `${state.winned} has won` : `It's a draw`}
           </Winner>
-          <button onClick={handleReset}>Reset</button>
+          <button onClick={handleReset} className={styles.reset}>
+            Reset
+          </button>
         </>
       )}
 

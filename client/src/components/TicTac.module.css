@@ -21,3 +21,16 @@
   align-self: flex-end;
   cursor: pointer;
 }
+
+.reset {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #ffd700;
+  text-shadow: 1px 1px 2px black;
+  font-size: larger;
+}
+.reset:hover {
+  background-color: #ceb424;
+  cursor: pointer;
+}
